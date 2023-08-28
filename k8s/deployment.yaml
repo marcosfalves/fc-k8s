@@ -18,13 +18,20 @@ spec:
       containers:
         - name: "goserver"
           image: "marcosfalves/hello-go:v7.2"
+          startupProbe:
+            httpGet:
+              path: /healthz
+              port: 8081
+            periodSeconds: 3
+            failureThreshold: 30
+
           readinessProbe:
             httpGet:
               path: /healthz
               port: 8081
             periodSeconds: 3
             failureThreshold: 1
-            initialDelaySeconds: 10 #Tempo de espera antes de começar as verificações
+            #initialDelaySeconds: 10 #Tempo de espera antes de começar as verificações
 
           livenessProbe:
             httpGet:
@@ -34,7 +41,7 @@ spec:
             failureThreshold: 1 #Quantas vezes precisa dar errado para marcar o container como não saudável=
             timeoutSeconds: 1 #Tempo máximo de espera da requisição de verificação (Valores baixos, pois normalmente esse endpoint responde rápido)
             successThreshold: 1 #Quantas vezes precisa dar certo para marcar o container como saudável
-            initialDelaySeconds: 15
+            #initialDelaySeconds: 15
 
           envFrom:
             - configMapRef:
