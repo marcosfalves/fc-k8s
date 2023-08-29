@@ -17,13 +17,13 @@ spec:
     spec:
       containers:
         - name: "goserver"
-          image: "marcosfalves/hello-go:v7.2"
+          image: "marcosfalves/hello-go:v7.3"
           resources:
             requests: #mínimo (Reservando os recursos do cluster para o pod)
-              cpu: 100m
+              cpu: "0.05"
               memory: 20Mi
             limits:
-              cpu: 500m
+              cpu: "0.05"
               memory: 25Mi
 
           startupProbe:
