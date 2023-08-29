@@ -18,6 +18,14 @@ spec:
       containers:
         - name: "goserver"
           image: "marcosfalves/hello-go:v7.2"
+          resources:
+            requests: #mínimo (Reservando os recursos do cluster para o pod)
+              cpu: 100m
+              memory: 20Mi
+            limits:
+              cpu: 500m
+              memory: 25Mi
+
           startupProbe:
             httpGet:
               path: /healthz
